@@ -2,7 +2,7 @@
 
 SQL-проект по продуктовой аналитике цифрового банка. Проект строится как практический бизнес-кейс: от проверки качества исходных данных до Customer 360, продуктовой воронки, анализа удержания, монетизации и клиентской сегментации.
 
-> Статус: **в разработке**. Текущий этап — аудит качества данных.
+> Статус: **в разработке**. Завершены аудит данных, clean-слой и первая версия Customer 360.
 
 ## Бизнес-задача
 
@@ -76,32 +76,20 @@ Transaction volume, успешные операции, средний чек, к
 
 ## SQL-инструменты
 
-CTE, подзапросы, `CASE`, условная агрегация, оконные функции, `ROW_NUMBER`, `RANK`, `LAG`, `LEAD`, `FILTER`, `DATE_TRUNC`, представления, индексы и `EXPLAIN ANALYZE`.
+В реализованной части используются CTE, подзапросы, `CASE`, условная агрегация, `ROW_NUMBER`, `FILTER`, представления, первичные и внешние ключи. `RANK`, `LAG`, `LEAD`, `DATE_TRUNC`, индексы и `EXPLAIN ANALYZE` будут добавлены на следующих этапах.
 
-## Планируемая структура репозитория
+## Структура репозитория
 
 ```text
 banking-product-analytics/
 ├── README.md
-├── data/
-│   └── README.md
 ├── sql/
 │   ├── 00_create_raw_schema.sql
 │   ├── 01_data_quality.sql
 │   ├── 02_create_clean_layer.sql
-│   ├── 03_customer_360.sql
-│   ├── 04_activation_funnel.sql
-│   ├── 05_retention.sql
-│   ├── 06_engagement.sql
-│   ├── 07_monetization.sql
-│   ├── 08_segmentation.sql
-│   └── 09_performance.sql
-├── docs/
-│   ├── data_model.png
-│   ├── data_quality_report.md
-│   └── business_findings.md
-└── dashboard/
-    └── screenshots/
+│   └── 03_customer_360.sql
+└── docs/
+    └── data_quality_report.md
 ```
 
 ## Текущий прогресс
@@ -110,9 +98,9 @@ banking-product-analytics/
 - [x] Спроектирована исходная модель данных
 - [x] Подготовлен и загружен синтетический датасет
 - [x] Сверено количество строк во всех исходных таблицах
-- [ ] Проведён аудит качества данных
-- [ ] Создан clean-слой
-- [ ] Построена витрина Customer 360
+- [x] Проведён аудит качества данных
+- [x] Создан clean-слой
+- [x] Построена витрина Customer 360
 - [ ] Рассчитана воронка активации
 - [ ] Выполнен когортный анализ и расчёт retention
 - [ ] Проанализированы engagement и monetization
@@ -126,4 +114,4 @@ PostgreSQL, Supabase, Advanced SQL, Data Modeling, GitHub.
 
 ## Текущий этап
 
-Сейчас проводится аудит качества данных. До завершения проверки raw-таблицы не очищаются: сначала фиксируются найденные проблемы, их влияние на метрики и правила дальнейшей обработки.
+Следующий этап проекта — расчёт воронки `Registration → Account Open → Card Issued → Card Activation → First Successful Transaction`. Retention, engagement, monetization, сегментация и оптимизация запросов пока не реализованы.
